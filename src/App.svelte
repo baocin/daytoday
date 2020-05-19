@@ -14,6 +14,7 @@
 	let pass = "";
 
 	let loggedInMessage = "";
+	let messageList = [];
 
 
     function createUser(e){
@@ -39,7 +40,8 @@
 	function UI(say, id){
     //   var li = $('#' + id).get(0) || $('<li>').attr('id', id).appendTo('ul');
 	//   $(li).text(say);
-		console.log(say)
+		console.log(messageList)
+		messageList = [...messageList, say];
 	};
 	
 	gun.on('auth', function(){
@@ -81,7 +83,11 @@
 	<input on:click={createUser} type="button" value="sign up">
 </form>
 
-<ul></ul>
+<ul>
+{#each messageList as message}
+<li>{message}</li>
+{/each}
+</ul>
 
 <form id="said" on:submit|preventDefault={handleSpeak}>
 	<input id="say" bind:value={say}>
